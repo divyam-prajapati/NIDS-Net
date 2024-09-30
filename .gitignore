@@ -2,6 +2,7 @@ data/
 results/
 ckpts/
 imgs_dev/
+depth_anything_v2/
 hf_gdino.py
 
 # Byte-compiled / optimized / DLL files

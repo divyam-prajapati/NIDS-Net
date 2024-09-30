@@ -67,7 +67,7 @@ class GroundingDINOObjectPredictor(ObjectPredictor):
     getting compact bounding boxes arounds generic objects.
     Hope is that these cropped bboxes when used with OpenAI CLIP yields good classification results.
     """
-    def __init__(self, use_vitb=False, threshold=0.10):
+    def __init__(self, use_vitb=False, box_threshold=0.10, text_threshold=0.10):
         super().__init__()
         self.ckpt_repo_id = "ShilongLiu/GroundingDINO"
         if use_vitb:
@@ -79,7 +79,8 @@ class GroundingDINOObjectPredictor(ObjectPredictor):
         self.model = self.load_model_hf(
             self.config_file, self.ckpt_repo_id, self.ckpt_filenmae
         )
-        self.threshold = threshold
+        self.box_threshold = box_threshold
+        self.text_threshold = text_threshold
     
 
     def load_model_hf(self, model_config_path, repo_id, filename):
@@ -155,7 +156,8 @@ class GroundingDINOObjectPredictor(ObjectPredictor):
             self.logger.error(f"Error during image transformation for visualization: {e}")
             raise e
     
-    def predict(self, image_pil: PILImg, det_text_prompt: str = "objects"):
+    with torch.no_grad():
+      def predict(self, image_pil: PILImg, det_text_prompt: str = "objects"):
         """
         Get predictions for a given image using GroundingDINO model.
         Paper: https://arxiv.org/abs/2303.05499
@@ -173,7 +175,7 @@ class GroundingDINOObjectPredictor(ObjectPredictor):
         try:
             _, image_tensor = self.image_transform_grounding(image_pil)
             # default: box_threshold=0.25, text_threshold=0.25
-            bboxes, conf, phrases = predict(self.model, image_tensor, det_text_prompt, box_threshold=self.threshold, text_threshold=self.threshold, device=self.device)
+            bboxes, conf, phrases = predict(self.model, image_tensor, det_text_prompt, box_threshold=self.box_threshold, text_threshold=self.text_threshold, device=self.device)
             return bboxes, phrases, conf        
         except Exception as e:
             self.logger.error(f"Error during model prediction: {e}")
@@ -209,8 +211,9 @@ class SegmentAnythingPredictor(ObjectPredictor):
         self.sam.to(device=self.device)
         self.sam.eval()
         self.predictor = SamPredictor(self.sam)
-
-    def predict(self, image, prompt_bboxes):
+        
+    with torch.no_grad():
+      def predict(self, image, prompt_bboxes):
         """
         Predict segmentation masks for the input image.
 

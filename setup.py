@@ -16,7 +16,7 @@ class FileFetch(install):
 
         # Install the dependency from the Git repository
         subprocess.run([
-            "pip", "install", "-U",
+            "pip3", "install", "-U",
             #'git+https://github.com/openai/CLIP.git@a1d071733d7111c9c014f024669f959182114e33',
             'git+https://github.com/IDEA-Research/GroundingDINO.git@2b62f419c292ca9c518daae55512fabc3fead4a4',
             # 'git+https://github.com/facebookresearch/segment-anything.git@6fdee8f2727f4506cfbbe553e23b895e27956588'

@@ -60,7 +60,6 @@ def stableMatching(preferenceMat):
                 freeManList.append(engagedMan)
     return engageMatrix
 
-
 def get_bbox_masks_from_gdino_sam(image_path, gdino, SAM, text_prompt='objects', visualize=False):
     """
     Get bounding boxes and masks from gdino and sam
@@ -85,7 +84,7 @@ def get_bbox_masks_from_gdino_sam(image_path, gdino, SAM, text_prompt='objects',
         w, h = image_pil.size  # Get image width and height
         # Scale bounding boxes to match the original image size
         image_pil_bboxes = gdino.bbox_to_scaled_xyxy(bboxes, w, h)
-
+        
         logging.info("SAM prediction")
         image_pil_bboxes, masks = SAM.predict(image_pil, image_pil_bboxes)
     masks = masks.squeeze(1)
@@ -406,6 +405,8 @@ def apply_nms(pred):
         keep_ids = batched_nms(boxes_tmp.cuda(), scores_tmp.cuda(), classes_tmp.cuda() * 0 + 1, iou_threshold)
     else:
         print("no box prediction!")
+        return None
+    
     return keep_ids
 
 # def get_scene_feature(output_dir, scene_name, scene_dataset, model, batch_size=1, num_workers=0):
