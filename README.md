@@ -4,9 +4,9 @@ This is a try on improving NIDS architecture, as the paper mentions the model ha
 
 ## Comparision on Results:
 1. Image 002 from HighRes Dataset
-["res_002"]("https://github.com/divyam-prajapati/NIDS-Net/blob/main/results/Screenshot%202024-09-18%20191120.png?raw=true")
+![res_002](https://github.com/divyam-prajapati/NIDS-Net/blob/main/results/Screenshot%202024-09-18%20191120.png?raw=true)
 2. Image 039 from HighRes Dataset
-["res_039"]("https://github.com/divyam-prajapati/NIDS-Net/blob/main/results/Screenshot%202024-09-18%20191154.png?raw=true")
+![res_039](https://github.com/divyam-prajapati/NIDS-Net/blob/main/results/Screenshot%202024-09-18%20191154.png?raw=true)
 
 
 
