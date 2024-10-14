@@ -19,9 +19,9 @@ This is a try on improving NIDS architecture, as the paper mentions the model ha
 
 
 ## TODO
-- [] Need to Test SW-NIDS on whole High Res Dataset to compare metrics
-- [] Find a better way to remove unwanted bbox's from windows (As Currently using ratio of areas as a condition to get rid of the unwanted bbox that are detected by the gdino in windows) 
-- [] Do the above point or find a ratio threshold that works in every case and is generalized
-- [] Generalized the window size for differert datasets and resolutions
-- [] Find a way to make this work on low res images like (640, 480), the main issue that is facing is that if the ratio of object:image_dimensions goes high then the algo fails as the object is divided into multiple bboxes
-- [] we can also find a way where we can find combine the bbox's of objects that are divied into multiple bbox's
+- [ ] Need to Test SW-NIDS on whole High Res Dataset to compare metrics
+- [ ] Find a better way to remove unwanted bbox's from windows (As Currently using ratio of areas as a condition to get rid of the unwanted bbox that are detected by the gdino in windows) 
+- [ ] Do the above point or find a ratio threshold that works in every case and is generalized
+- [ ] Generalized the window size for differert datasets and resolutions
+- [ ] Find a way to make this work on low res images like (640, 480), the main issue that is facing is that if the ratio of object:image_dimensions goes high then the algo fails as the object is divided into multiple bboxes
+- [ ] we can also find a way where we can find combine the bbox's of objects that are divied into multiple bbox's
